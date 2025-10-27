@@ -28,6 +28,7 @@ jobs:
           cache-read-only: false
 
       - name: Build with Gradle
+        working-directory: backend
         run: ./gradlew clean build
 
       - name: Jacoco pull request commit
