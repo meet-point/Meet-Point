@@ -1,13 +1,13 @@
-package ru.meetpoint.testservice;
+package ru.meetpoint.authservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestServiceApplication {
+public class AuthServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestServiceApplication.class);
+        SpringApplication.run(AuthServiceApplication.class);
     }
 
 }
