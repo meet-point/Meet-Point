@@ -2,10 +2,13 @@ spring:
   application:
     name: auth-service
 
-#  datasource:
-#    url:
-#
-#  liquibase:
-#    change-log:
-#    enabled: true
-#    default-schema: public
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+  liquibase:
+    enabled: false
+
+server:
+  port: 8080

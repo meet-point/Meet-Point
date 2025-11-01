@@ -12,21 +12,31 @@ services:
       - auth-liquibase
     env_file:
       .env
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_AUTH_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_AUTH_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
     restart: no
     networks:
       - auth-network
 
   auth-db:
     image: postgres:16-alpine
-    container_name: auth_db
+    container_name: auth-db
     environment:
-      POSTGRES_DB: ${AUTH_SPRING_DATASOURCE_DB}
-      POSTGRES_USER: ${AUTH_SPRING_DATASOURCE_USERNAME}
-      POSTGRES_PASSWORD: ${AUTH_SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_DB: ${SPRING_DATASOURCE_AUTH_DB}
+      POSTGRES_USER: ${SPRING_DATASOURCE_AUTH_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
       - auth-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - auth-network
 
@@ -34,9 +44,10 @@ services:
     image: liquibase/liquibase:4.29
     container_name: auth-liquibase
     depends_on:
-      - auth-db
+      auth-db:
+        condition: service_healthy
     volumes:
-      - ./auth-service/migrations:/changesets
+      - ./backend/auth-service/migrations/changelog:/changesets
     command:
       - --searchPath=${AUTH_LIQUIBASE_SEARCH_PATH}
       - --changelog-file=${AUTH_LIQUIBASE_CHANGELOG_FILE}
