@@ -1,0 +1,88 @@
+services:
+
+  auth-service:
+    build:
+      context: backend/auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - 8080:8080
+    depends_on:
+      - auth-db
+      - auth-liquibase
+      - auth-redis
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_AUTH_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_AUTH_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
+      AUTH_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
+      AUTH_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+    restart: no
+    networks:
+      - auth-network
+
+  auth-db:
+    image: postgres:16-alpine
+    container_name: auth-db
+    environment:
+      POSTGRES_DB: ${SPRING_DATASOURCE_AUTH_DB}
+      POSTGRES_USER: ${SPRING_DATASOURCE_AUTH_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - auth-network
+
+  auth-liquibase:
+    image: liquibase/liquibase:4.29
+    container_name: auth-liquibase
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    volumes:
+      - ./backend/auth-service/migrations/changelog:/changesets
+    command:
+      - --searchPath=${AUTH_LIQUIBASE_SEARCH_PATH}
+      - --changelog-file=${AUTH_LIQUIBASE_CHANGELOG_FILE}
+      - --driver=${AUTH_LIQUIBASE_DRIVER}
+      - --url=${AUTH_LIQUIBASE_URL}
+      - --username=${AUTH_LIQUIBASE_USERNAME}
+      - --password=${AUTH_LIQUIBASE_PASSWORD}
+      - update
+    networks:
+      - auth-network
+
+  auth-redis:
+    image: redis:7.2
+    container_name: auth-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - auth-network
+
+volumes:
+  auth-db-data:
+  redis-data:
+
+networks:
+  auth-network:
+
