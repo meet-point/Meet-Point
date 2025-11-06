@@ -9,25 +9,3 @@ databaseChangeLog:
             splitStatements: true
             endDelimiter: ";"
             encoding: UTF-8
-
-  - changeSet:
-      id: 20251025-insert-accounts
-      author: EgorCharntsev
-      changes:
-        - sqlFile:
-            path: v0.0.1/DML/V0.0.1__20251025_INSERT_ACCOUNTS.sql
-            relativeToChangelogFile: true
-            splitStatements: true
-            endDelimiter: ";"
-            encoding: UTF-8
-
-  - changeSet:
-      id: 20251025-insert-profiles
-      author: EgorCharntsev
-      changes:
-        - sqlFile:
-            path: v0.0.1/DML/V0.0.1__20251025_INSERT_PROFILES.sql
-            relativeToChangelogFile: true
-            splitStatements: true
-            endDelimiter: ";"
-            encoding: UTF-8
