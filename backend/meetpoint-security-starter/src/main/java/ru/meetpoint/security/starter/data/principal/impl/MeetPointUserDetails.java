@@ -1,14 +1,13 @@
-package ru.meetpoint.authservice.data.principal.impl;
+package ru.meetpoint.security.starter.data.principal.impl;
 
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
-import ru.meetpoint.authservice.data.enums.Role;
-import ru.meetpoint.authservice.data.enums.State;
-import ru.meetpoint.authservice.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.Role;
+import ru.meetpoint.security.starter.data.enums.State;
+import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
 
 import java.util.Collection;
 import java.util.Set;
@@ -29,12 +28,13 @@ public class MeetPointUserDetails implements UserDetails, CredentialsContainer, 
 
     private final Set<AuthProvider> authProviders;
 
-    public MeetPointUserDetails(UserData userData, Set<AuthProvider> authProviders, String hashedPassword) {
-        this.userId = userData.getUserId();
-        this.userEmail = userData.getEmail();
+    public MeetPointUserDetails(UUID userId, String userEmail, String hashedPassword,
+                                State accountState, Set<Role> userRoles, Set<AuthProvider> authProviders) {
+        this.userId = userId;
+        this.userEmail = userEmail;
         this.hashedPassword = hashedPassword;
-        this.accountState = userData.getState();
-        this.userRoles = userData.getRoles();
+        this.accountState = accountState;
+        this.userRoles = userRoles;
         this.authProviders = authProviders;
     }
 

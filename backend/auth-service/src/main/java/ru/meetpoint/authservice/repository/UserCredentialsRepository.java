@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ru.meetpoint.authservice.data.entity.UserCredentials;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public interface UserCredentialsRepository extends JpaRepository<UserCredentials
 
     @Query("""
             SELECT c FROM UserCredentials c
-            WHERE c.userData.state != ru.meetpoint.authservice.data.enums.State.DELETED
+            WHERE c.userData.state != ru.meetpoint.security.starter.data.enums.State.DELETED
             AND c.providerKey = :providerKey
             AND c.providerType = :providerType
             """)

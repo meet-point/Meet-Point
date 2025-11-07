@@ -1,8 +1,8 @@
-package ru.meetpoint.authservice.data.principal;
+package ru.meetpoint.security.starter.data.principal;
 
-import ru.meetpoint.authservice.data.enums.AuthProvider;
-import ru.meetpoint.authservice.data.enums.Role;
-import ru.meetpoint.authservice.data.enums.State;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.Role;
+import ru.meetpoint.security.starter.data.enums.State;
 
 import java.util.Set;
 import java.util.UUID;

@@ -19,10 +19,10 @@ import ru.meetpoint.authservice.data.dto.request.form.RegistrationForm;
 import ru.meetpoint.authservice.data.dto.response.AccessTokenResponse;
 import ru.meetpoint.authservice.data.dto.response.EmailAvailabilityResponse;
 import ru.meetpoint.authservice.data.dto.response.RegistrationResponse;
-import ru.meetpoint.authservice.data.principal.UnifiedAuthPrincipal;
-import ru.meetpoint.authservice.error.dto.ApiErrorResponse;
 import ru.meetpoint.authservice.error.dto.OperationResponse;
 import ru.meetpoint.authservice.error.dto.ValidationErrorResponse;
+import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.ApiErrorResponse;
 
 @Tag(
         name = "Authentication API",

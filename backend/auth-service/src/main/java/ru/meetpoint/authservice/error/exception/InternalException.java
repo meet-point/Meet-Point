@@ -1,7 +1,7 @@
 package ru.meetpoint.authservice.error.exception;
 
 import org.springframework.http.HttpStatus;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
 
 public class InternalException extends ServiceException {
 

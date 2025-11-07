@@ -2,7 +2,7 @@ package ru.meetpoint.authservice.error.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
 
 import java.util.List;
 

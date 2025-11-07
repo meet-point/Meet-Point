@@ -1,4 +1,4 @@
-package ru.meetpoint.authservice.config.security;
+package ru.meetpoint.security.starter.property;
 
 public class SecurityEndpoints {
 

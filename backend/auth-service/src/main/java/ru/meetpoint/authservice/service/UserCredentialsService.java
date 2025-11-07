@@ -1,6 +1,6 @@
 package ru.meetpoint.authservice.service;
 
-import ru.meetpoint.authservice.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
 
 import java.util.UUID;
 

@@ -2,7 +2,7 @@ package ru.meetpoint.authservice.error.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
 
 @Getter
 public class ServiceException extends RuntimeException {

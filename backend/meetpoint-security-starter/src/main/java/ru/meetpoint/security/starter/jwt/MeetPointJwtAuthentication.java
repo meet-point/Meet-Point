@@ -1,4 +1,4 @@
-package ru.meetpoint.authservice.jwt;
+package ru.meetpoint.security.starter.jwt;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
