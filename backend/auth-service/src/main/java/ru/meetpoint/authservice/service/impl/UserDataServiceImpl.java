@@ -2,17 +2,17 @@ package ru.meetpoint.authservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.meetpoint.authservice.config.property.AuthConfigProperties;
+import ru.meetpoint.authservice.config.property.JwtConfigProperties;
 import ru.meetpoint.authservice.config.property.ErrorMessageProperties;
 import ru.meetpoint.authservice.data.dto.request.form.RegistrationForm;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.State;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
 import ru.meetpoint.authservice.error.exception.BadRequestException;
 import ru.meetpoint.authservice.error.exception.ForbiddenException;
 import ru.meetpoint.authservice.mapper.UserDataMapper;
 import ru.meetpoint.authservice.repository.UserDataRepository;
 import ru.meetpoint.authservice.service.UserDataService;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
+import ru.meetpoint.security.starter.data.enums.State;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -28,7 +28,7 @@ public class UserDataServiceImpl implements UserDataService {
 
     private final UserDataMapper userDataMapper;
 
-    private final AuthConfigProperties authConfigProperties;
+    private final JwtConfigProperties jwtConfigProperties;
 
     private final ErrorMessageProperties errorMessageProperties;
 
@@ -86,9 +86,9 @@ public class UserDataServiceImpl implements UserDataService {
         ).replaceAll("\\s+", " ").trim();
 
         return Map.of(
-                authConfigProperties.jwtUserIdKey(), userData.getUserId(),
-                authConfigProperties.jwtRolesKey(), userData.getRoles(),
-                authConfigProperties.jwtNameKey(), fullName
+                jwtConfigProperties.jwtUserIdKey(), userData.getUserId(),
+                jwtConfigProperties.jwtRolesKey(), userData.getRoles(),
+                jwtConfigProperties.jwtNameKey(), fullName
         );
     }
 }

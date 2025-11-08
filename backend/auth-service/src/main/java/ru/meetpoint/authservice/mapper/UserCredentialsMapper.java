@@ -3,7 +3,7 @@ package ru.meetpoint.authservice.mapper;
 import org.springframework.stereotype.Component;
 import ru.meetpoint.authservice.data.entity.UserCredentials;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
 
 @Component
 public class UserCredentialsMapper {

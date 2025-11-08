@@ -9,6 +9,8 @@ public class SecurityEndpoints {
             "/api/v1/locations/**",
             "/api/v1/organizations/**",
             "/api/v1/topics/**",
+            "/actuator/**",
+            "/error/**"
     };
 
     public static final String[] ANONYMOUS_ENDPOINTS = {
@@ -18,6 +20,7 @@ public class SecurityEndpoints {
     };
 
     public static final String[] AUTHENTICATED_ENDPOINTS = {
+            "/api/v1/auth/logout",
             "/api/v1/events/**",
             "/api/v1/locations/**",
             "/api/v1/organizations/**",

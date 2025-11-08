@@ -3,10 +3,9 @@ package ru.meetpoint.authservice.mapper;
 import org.springframework.stereotype.Component;
 import ru.meetpoint.authservice.data.dto.request.form.RegistrationForm;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.Role;
-import ru.meetpoint.authservice.data.enums.State;
+import ru.meetpoint.security.starter.data.enums.Role;
+import ru.meetpoint.security.starter.data.enums.State;
 
-import java.sql.Timestamp;
 import java.util.Set;
 
 @Component

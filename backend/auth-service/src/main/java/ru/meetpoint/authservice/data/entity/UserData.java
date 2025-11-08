@@ -3,8 +3,9 @@ package ru.meetpoint.authservice.data.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
-import ru.meetpoint.authservice.data.enums.Role;
-import ru.meetpoint.authservice.data.enums.State;
+import ru.meetpoint.security.starter.data.enums.Role;
+import ru.meetpoint.security.starter.data.enums.State;
+
 
 import java.sql.Timestamp;
 import java.util.HashSet;

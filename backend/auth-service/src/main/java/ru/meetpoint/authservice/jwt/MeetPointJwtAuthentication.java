@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import ru.meetpoint.authservice.data.principal.impl.MeetPointUserDetails;
+import ru.meetpoint.security.starter.data.principal.impl.MeetPointUserDetails;
 
 import java.util.Collection;
 

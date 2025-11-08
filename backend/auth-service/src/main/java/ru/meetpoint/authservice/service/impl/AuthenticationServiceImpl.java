@@ -1,23 +1,25 @@
 package ru.meetpoint.authservice.service.impl;
 
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.meetpoint.authservice.config.property.AuthConfigProperties;
+import ru.meetpoint.authservice.config.property.JwtConfigProperties;
 import ru.meetpoint.authservice.config.property.ErrorMessageProperties;
+import ru.meetpoint.authservice.config.property.MailConfigProperties;
 import ru.meetpoint.authservice.data.dto.inner.JwtTokenResponse;
 import ru.meetpoint.authservice.data.dto.request.form.LoginForm;
 import ru.meetpoint.authservice.data.dto.request.form.RegistrationForm;
 import ru.meetpoint.authservice.data.dto.response.AccessTokenResponse;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
 import ru.meetpoint.authservice.error.exception.BadRequestException;
 import ru.meetpoint.authservice.error.exception.ForbiddenException;
 import ru.meetpoint.authservice.error.exception.UnauthorizedException;
-import ru.meetpoint.authservice.jwt.JwtProvider;
 import ru.meetpoint.authservice.service.*;
 import ru.meetpoint.authservice.util.mail.MailService;
 import ru.meetpoint.authservice.util.validation.validator.RegistrationFormValidator;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
+import ru.meetpoint.security.starter.jwt.JwtProvider;
 
 import java.security.SecureRandom;
 import java.util.Map;
@@ -44,7 +46,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final RegistrationFormValidator registrationFormValidator;
 
-    private final AuthConfigProperties authConfigProperties;
+    private final JwtConfigProperties jwtConfigProperties;
+
+    private final MailConfigProperties mailConfigProperties;
 
     private final ErrorMessageProperties errorMessageProperties;
 
@@ -73,6 +77,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         if (userCredentialsService.checkLoginCredentials(email, password)) {
             Map<String, Object> jwtClaims = userDataService.getJwtClaimsMapByEmail(email);
+
+            System.out.println(jwtClaims.get(jwtConfigProperties.jwtUserIdKey()));
+            System.out.println(jwtClaims.get(jwtConfigProperties.jwtNameKey()));
+            System.out.println(jwtClaims.get(jwtConfigProperties.jwtRolesKey()));
             return generateTokens(email, jwtClaims);
         } else {
             throw new BadRequestException(ErrorCode.INCORRECT_LOGIN_CREDENTIALS,
@@ -135,7 +143,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private String generateEmailVerificationCode() {
-        int length = authConfigProperties.emailVerificationCodeLength();
+        int length = mailConfigProperties.emailVerificationCodeLength();
         int min = (int) Math.pow(10, length - 1);
         int max = (int) Math.pow(10, length) - 1;
 
@@ -143,9 +151,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private JwtTokenResponse generateTokens(String email, Map<String, Object> claims) {
-        UUID userId = (UUID) claims.get(authConfigProperties.jwtUserIdKey());
+        UUID userId = (UUID) claims.get(jwtConfigProperties.jwtUserIdKey());
         String refreshToken = jwtProvider.generateRefreshToken(email);
         String accessToken = jwtProvider.generateAccessToken(email, claims);
+
+        System.out.println("AuthServiceImpl generateTokens check");
+        Claims checkedClaims = jwtProvider.extractAllClaims(accessToken);
+        System.out.println(checkedClaims.getSubject());
+        System.out.println(checkedClaims.get(jwtConfigProperties.jwtUserIdKey()));
+        System.out.println(checkedClaims.get(jwtConfigProperties.jwtNameKey()));
+        System.out.println(checkedClaims.get(jwtConfigProperties.jwtRolesKey()));
 
         refreshTokenStoreService.storeRefreshToken(userId, refreshToken);
         return JwtTokenResponse.builder()
