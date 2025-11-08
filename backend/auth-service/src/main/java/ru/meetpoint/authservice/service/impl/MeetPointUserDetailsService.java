@@ -6,10 +6,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.meetpoint.authservice.data.entity.UserCredentials;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
-import ru.meetpoint.authservice.data.principal.impl.MeetPointUserDetails;
 import ru.meetpoint.authservice.repository.UserCredentialsRepository;
 import ru.meetpoint.authservice.repository.UserDataRepository;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.principal.impl.MeetPointUserDetails;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +39,7 @@ public class MeetPointUserDetailsService implements UserDetailsService {
                 .filter(Objects::nonNull)
                 .findFirst());
 
-        return new MeetPointUserDetails(userData, authProviders, hashedPassword);
+        return new MeetPointUserDetails(userData.getUserId(), userData.getEmail(), hashedPassword, userData.getState(),
+                userData.getRoles(), authProviders);
     }
 }

@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import ru.meetpoint.authservice.config.property.ErrorMessageProperties;
 import ru.meetpoint.authservice.data.entity.UserCredentials;
 import ru.meetpoint.authservice.data.entity.UserData;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
-import ru.meetpoint.authservice.data.enums.State;
-import ru.meetpoint.authservice.error.enums.ErrorCode;
 import ru.meetpoint.authservice.error.exception.BadRequestException;
 import ru.meetpoint.authservice.error.exception.ForbiddenException;
 import ru.meetpoint.authservice.mapper.UserCredentialsMapper;
 import ru.meetpoint.authservice.repository.UserCredentialsRepository;
 import ru.meetpoint.authservice.repository.UserDataRepository;
 import ru.meetpoint.authservice.service.UserCredentialsService;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.ErrorCode;
+import ru.meetpoint.security.starter.data.enums.State;
 
 import java.util.Optional;
 import java.util.UUID;

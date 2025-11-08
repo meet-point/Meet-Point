@@ -1,4 +1,4 @@
-package ru.meetpoint.authservice.data.enums;
+package ru.meetpoint.security.starter.data.enums;
 
 public enum State {
     ACTIVE,

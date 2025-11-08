@@ -3,7 +3,7 @@ package ru.meetpoint.authservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import ru.meetpoint.authservice.config.property.AuthConfigProperties;
+import ru.meetpoint.authservice.config.property.MailConfigProperties;
 import ru.meetpoint.authservice.service.EmailVerificationCodeStoreService;
 
 @Service
@@ -12,7 +12,7 @@ public class RedisEmailVerificationCodeStoreServiceImpl implements EmailVerifica
 
     private final RedisTemplate<String, String> redisTemplate;
 
-    private final AuthConfigProperties authConfigProperties;
+    private final MailConfigProperties mailConfigProperties;
 
     private static final String PREFIX = "verify_code:";
 
@@ -20,7 +20,7 @@ public class RedisEmailVerificationCodeStoreServiceImpl implements EmailVerifica
     public void storeEmailVerificationCode(String email, String verificationCode) {
         String key = PREFIX.concat(email);
         redisTemplate.opsForValue().set(key, verificationCode.trim(),
-                authConfigProperties.emailVerificationCodeExpiration().getSeconds());
+                mailConfigProperties.emailVerificationCodeExpiration().getSeconds());
     }
 
     @Override

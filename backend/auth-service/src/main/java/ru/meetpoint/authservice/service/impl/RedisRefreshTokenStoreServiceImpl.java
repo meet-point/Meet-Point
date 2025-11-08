@@ -3,7 +3,7 @@ package ru.meetpoint.authservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import ru.meetpoint.authservice.config.property.AuthConfigProperties;
+import ru.meetpoint.authservice.config.property.JwtConfigProperties;
 import ru.meetpoint.authservice.service.RefreshTokenStoreService;
 
 import java.util.UUID;
@@ -14,14 +14,14 @@ public class RedisRefreshTokenStoreServiceImpl implements RefreshTokenStoreServi
 
     private final RedisTemplate<String, String> redisTemplate;
 
-    private final AuthConfigProperties authConfigProperties;
+    private final JwtConfigProperties jwtConfigProperties;
 
     private static final String PREFIX = "refresh_token:";
 
     @Override
     public void storeRefreshToken(UUID userId, String refreshToken) {
         String key = PREFIX.concat(userId.toString());
-        redisTemplate.opsForValue().set(key, refreshToken, authConfigProperties.refreshTokenExpiration());
+        redisTemplate.opsForValue().set(key, refreshToken, jwtConfigProperties.refreshTokenExpiration());
     }
 
     @Override

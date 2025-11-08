@@ -17,10 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
-import ru.meetpoint.authservice.error.handler.MeetPointAccessDeniedHandler;
-import ru.meetpoint.authservice.error.handler.MeetPointAuthenticationEntryPoint;
-import ru.meetpoint.authservice.jwt.JwtAuthenticationFilter;
 import ru.meetpoint.authservice.service.impl.MeetPointUserDetailsService;
+import ru.meetpoint.security.starter.handler.MeetPointAccessDeniedHandler;
+import ru.meetpoint.security.starter.handler.MeetPointAuthenticationEntryPoint;
+import ru.meetpoint.security.starter.jwt.JwtAuthenticationFilter;
 
 import static ru.meetpoint.authservice.config.security.SecurityEndpoints.*;
 

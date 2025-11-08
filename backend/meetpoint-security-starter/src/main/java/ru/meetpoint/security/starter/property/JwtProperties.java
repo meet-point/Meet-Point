@@ -1,20 +1,16 @@
-package ru.meetpoint.authservice.config.property;
+package ru.meetpoint.security.starter.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
-@ConfigurationProperties(prefix = "auth")
-public record AuthConfigProperties(
+@ConfigurationProperties(prefix = "jwt")
+public record JwtProperties(
         String privateKey,
         String publicKey,
         Duration accessTokenExpiration,
         Duration refreshTokenExpiration,
         String refreshTokenCookieKey,
-        String emailCookieKey,
-        int emailVerificationCodeLength,
-        Duration emailVerificationCodeExpiration,
         String jwtSubjectKey,
         String jwtUserIdKey,
         String jwtRolesKey,

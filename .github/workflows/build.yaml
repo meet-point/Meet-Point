@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -19,6 +20,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x backend/gradlew
 
+      - name: Make gradlew at starter executable
+        run: chmod +x backend/meetpoint-security-starter/gradlew
+
       - name: Set up JDK17 + Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -26,6 +30,10 @@ jobs:
           distribution: temurin
           gradle-wrapper-directory: backend
           cache-read-only: false
+
+      - name: Publish starter to local Maven
+        run: ./gradlew publishToMavenLocal
+        working-directory: backend/meetpoint-security-starter
 
       - name: Build with Gradle
         working-directory: backend

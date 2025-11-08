@@ -1,9 +1,12 @@
-package ru.meetpoint.authservice.jwt;
+package ru.meetpoint.security.starter.jwt;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.meetpoint.authservice.config.property.AuthConfigProperties;
+import ru.meetpoint.security.starter.property.JwtProperties;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -23,18 +26,18 @@ public class JwtProvider {
 
     private final PrivateKey privateKey;
 
-    private final AuthConfigProperties authConfigProperties;
+    private final JwtProperties jwtProperties;
 
-    public JwtProvider(AuthConfigProperties authConfigProperties) {
-        this.authConfigProperties = authConfigProperties;
-        this.privateKey = loadPrivateKey(authConfigProperties.privateKey());
-        this.publicKey = loadPublicKey(authConfigProperties.publicKey());
+    public JwtProvider(JwtProperties jwtProperties) {
+        this.jwtProperties = jwtProperties;
+        this.privateKey = loadPrivateKey(jwtProperties.privateKey());
+        this.publicKey = loadPublicKey(jwtProperties.publicKey());
         this.jwtParser = Jwts.parser().verifyWith(publicKey).build();
     }
 
     public String generateAccessToken(String subject, Map<String, Object> claims) {
         Instant now = Instant.now();
-        Instant expiry = now.plusSeconds(authConfigProperties.accessTokenExpiration().toSeconds());
+        Instant expiry = now.plusSeconds(jwtProperties.accessTokenExpiration().toSeconds());
 
         Map<String, Object> processedClaims = processClaimsForGeneration(claims);
         return Jwts.builder()
@@ -48,7 +51,7 @@ public class JwtProvider {
 
     public String generateRefreshToken(String subject) {
         Instant now = Instant.now();
-        Instant expiry = now.plusSeconds(authConfigProperties.refreshTokenExpiration().toSeconds());
+        Instant expiry = now.plusSeconds(jwtProperties.refreshTokenExpiration().toSeconds());
 
         return Jwts.builder()
                 .subject(subject)

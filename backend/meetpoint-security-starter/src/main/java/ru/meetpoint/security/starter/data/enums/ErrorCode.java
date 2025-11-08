@@ -1,4 +1,4 @@
-package ru.meetpoint.authservice.error.enums;
+package ru.meetpoint.security.starter.data.enums;
 
 public enum ErrorCode {
     PASSWORD_DO_NOT_MATCH,

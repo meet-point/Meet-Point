@@ -3,7 +3,7 @@ package ru.meetpoint.authservice.data.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
-import ru.meetpoint.authservice.data.enums.AuthProvider;
+import ru.meetpoint.security.starter.data.enums.AuthProvider;
 
 import java.util.UUID;
 
