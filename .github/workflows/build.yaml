@@ -24,7 +24,7 @@ jobs:
 
       - name: Publish starter to local Maven
         run: ./gradlew publishToMavenLocal
-        working-directory: ./meetpoint-security-starter
+        working-directory: backend/meetpoint-security-starter
 
   build:
     runs-on: ubuntu-latest
