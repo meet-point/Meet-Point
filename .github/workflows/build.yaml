@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-          gradle-wrapper-directory: ./meetpoint-security-starter
+          gradle-wrapper-directory: backend/meetpoint-security-starter
           cache-read-only: false
 
       - name: Setup Gradle
