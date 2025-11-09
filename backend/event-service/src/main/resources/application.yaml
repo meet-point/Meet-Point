@@ -1,3 +1,25 @@
 spring:
   application:
     name: event-service
+
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        service-name: ${spring.application.name}
+        prefer-ip-address: false
+        host-name: event-service
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+server:
+  port: 8080

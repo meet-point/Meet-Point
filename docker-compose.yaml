@@ -103,11 +103,26 @@ services:
     networks:
       - auth-network
 
+  event-service:
+    build:
+      context: backend/event-service
+      dockerfile: Dockerfile
+    container_name: event-service
+    expose:
+      - 8080
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - event-network
+      - backend
+
 volumes:
   auth-db-data:
   redis-data:
 
 networks:
   auth-network:
+  event-network:
   backend:
 
