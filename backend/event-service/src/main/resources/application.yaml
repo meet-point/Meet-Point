@@ -15,6 +15,25 @@ spring:
         health-check-path: /actuator/health
         health-check-interval: 10s
 
+  datasource:
+    url: ${EVENT_SERVICE_DATASOURCE_DB}
+    username: ${EVENT_SERVICE_DATASOURCE_USERNAME}
+    password: ${EVENT_SERVICE_DATASOURCE_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  liquibase:
+    enabled: false
+
 management:
   endpoints:
     web:

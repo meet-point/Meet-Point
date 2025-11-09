@@ -34,7 +34,7 @@ CREATE TABLE user_role
     role    VARCHAR(20),
     -----------------------------------------------------------------------------
     CONSTRAINT us_pk PRIMARY KEY (user_id, role),
-    CONSTRAINT us_r_user_id_nn CHECK ( user_id IS NOT NULL),
+    CONSTRAINT us_r_user_id_nn CHECK (user_id IS NOT NULL),
     CONSTRAINT us_r_user_id_fk FOREIGN KEY (user_id) REFERENCES user_data (user_id),
-    CONSTRAINT us_r_role_nn CHECK ( role IS NOT NULL )
+    CONSTRAINT us_r_role_nn CHECK (role IS NOT NULL )
 );
