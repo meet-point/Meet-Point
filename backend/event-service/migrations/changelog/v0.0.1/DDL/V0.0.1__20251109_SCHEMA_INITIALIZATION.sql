@@ -128,7 +128,8 @@ CREATE TABLE IF NOT EXISTS event_data
     max_allowed_people SMALLINT,
     registered_now     SMALLINT,
     address            VARCHAR(100),
-    public_status      VARCHAR(20),
+    access_status      VARCHAR(20),
+    publish_status     VARCHAR(20),
     ------------------------------------------------------------------------------------------------------
     CONSTRAINT event_data_event_id_pk PRIMARY KEY (event_id),
     CONSTRAINT event_data_location_id_fk FOREIGN KEY (location_id) REFERENCES location_data (location_id),
@@ -136,15 +137,14 @@ CREATE TABLE IF NOT EXISTS event_data
     CONSTRAINT event_data_label_nn CHECK (label IS NOT NULL),
     CONSTRAINT event_data_preview_nn CHECK (preview IS NOT NULL),
     CONSTRAINT event_data_description_nn CHECK (description IS NOT NULL),
-    CONSTRAINT event_data_public_status_nn CHECK (public_status IS NOT NULL)
+    CONSTRAINT event_data_access_status_nn CHECK (access_status IS NOT NULL),
+    CONSTRAINT event_data_publish_status_nn CHECK (publish_status IS NOT NULL),
 );
 
 CREATE TABLE IF NOT EXISTS event_additional_info
 (
     event_id         UUID,
     publication_time TIMESTAMP,
-    access_status    VARCHAR(20),
-    publish_status   VARCHAR(20),
     creator_id       UUID,
     created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_update_by   UUID,
@@ -153,8 +153,6 @@ CREATE TABLE IF NOT EXISTS event_additional_info
     CONSTRAINT event_add_info_event_id_pk PRIMARY KEY (event_id),
     CONSTRAINT event_add_info_event_id_fk FOREIGN KEY (event_id) REFERENCES event_data (event_id),
     CONSTRAINT event_add_info_publication_time_nn CHECK (publication_time IS NOT NULL),
-    CONSTRAINT event_add_info_access_status_nn CHECK (access_status IS NOT NULL),
-    CONSTRAINT event_add_info_publish_status_nn CHECK (publish_status IS NOT NULL),
     CONSTRAINT event_add_info_creator_id_nn CHECK (creator_id IS NOT NULL),
     CONSTRAINT event_add_info_created_at_nn CHECK (created_at IS NOT NULL)
 );
