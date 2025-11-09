@@ -2,7 +2,7 @@ package ru.meetpoint.eventservice.data.entity.organization;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.meetpoint.eventservice.data.entity.organization.embadable.OrganizationManagerId;
+import ru.meetpoint.eventservice.data.entity.organization.embeddable.OrganizationManagerId;
 
 import java.sql.Timestamp;
 import java.util.UUID;

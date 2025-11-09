@@ -1,4 +1,4 @@
-package ru.meetpoint.eventservice.data.entity.organization.embadable;
+package ru.meetpoint.eventservice.data.entity.organization.embeddable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
