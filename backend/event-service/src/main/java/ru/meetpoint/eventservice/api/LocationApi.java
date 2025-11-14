@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.meetpoint.eventservice.data.dto.request.location.LocationRequest;
+import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationShortResponse;
 import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
@@ -31,10 +32,11 @@ public interface LocationApi {
     @ResponseStatus(HttpStatus.OK)
     LocationShortResponse getAllForMainPage();
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     Page<LocationShortResponse> getByCriteria(
-            //TODO: CriteriaRequest??
+            @Valid
+            @RequestBody UnifiedSearchCriteriaRequest searchCriteriaRequest
     );
 
     @GetMapping("/{locationId}")

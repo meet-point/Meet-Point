@@ -21,7 +21,7 @@ public class CategoryData {
     @Id
     @UuidGenerator
     @Column(name = "category_id")
-    private UUID category_id;
+    private UUID categoryId;
 
     @Column(name = "label")
     private String label;

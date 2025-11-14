@@ -47,9 +47,6 @@ public class EventData {
     @Column(name = "registered_now")
     private int registeredNow;
 
-    @Column(name = "address")
-    private String address;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "access_status")
     private EventAccessStatus accessStatus;
@@ -58,7 +55,7 @@ public class EventData {
     @Column(name = "publish_status")
     private EventPublishStatus publishStatus;
 
-    @OneToOne(mappedBy = "eventData", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "eventData", cascade = CascadeType.ALL, orphanRemoval = true)
     private EventAdditional eventAdditional;
 
     @ManyToOne

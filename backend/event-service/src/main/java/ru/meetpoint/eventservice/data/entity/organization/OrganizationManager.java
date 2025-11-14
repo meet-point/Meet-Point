@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "organization_manager")
-public class OrganizationManagers {
+public class OrganizationManager {
 
     @EmbeddedId
     private OrganizationManagerId organizationManagerId;

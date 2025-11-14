@@ -42,7 +42,7 @@ public class OrganizationData {
     private OrganizationAdditional organizationAdditional;
 
     @OneToMany(mappedBy = "organizationData")
-    private Set<OrganizationManagers> managers = new HashSet<>();
+    private Set<OrganizationManager> managers = new HashSet<>();
 
     @OneToMany(mappedBy = "organizationData")
     private Set<LocationData> locations = new HashSet<>();

@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ru.meetpoint.eventservice.data.dto.request.organization.OrganizationRequest;
+import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationShortResponse;
@@ -31,10 +32,11 @@ public interface OrganizationApi {
     @ResponseStatus(HttpStatus.OK)
     OrganizationShortResponse getAllForMainPage();
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     Page<OrganizationShortResponse> getByCriteria(
-            //TODO: CriteriaRequest??
+            @Valid
+            @RequestBody UnifiedSearchCriteriaRequest searchCriteriaRequest
     );
 
     @GetMapping("/{organizationId}")

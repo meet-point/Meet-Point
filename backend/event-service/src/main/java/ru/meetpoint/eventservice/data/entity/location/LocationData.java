@@ -9,6 +9,7 @@ import ru.meetpoint.eventservice.data.enums.LocationPublicStatus;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class LocationData {
     @Id
     @UuidGenerator
     @Column(name = "location_id")
-    private String locationId;
+    private UUID locationId;
 
     @Column(name = "label")
     private String label;

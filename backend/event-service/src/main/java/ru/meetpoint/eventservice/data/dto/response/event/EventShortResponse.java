@@ -16,7 +16,7 @@ public record EventShortResponse(
         String preview,
         EventAccessStatus accessStatus,
         EventPublishStatus publishStatus,
-        Set<String> categories,
+        String categoryLabel,
         Timestamp dateTime,
         int maxAllowedPeople,
         int registeredNow,

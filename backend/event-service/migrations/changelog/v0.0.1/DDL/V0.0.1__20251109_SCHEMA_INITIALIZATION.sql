@@ -127,7 +127,6 @@ CREATE TABLE IF NOT EXISTS event_data
     cost               DECIMAL(10,2),
     max_allowed_people SMALLINT,
     registered_now     SMALLINT,
-    address            VARCHAR(100),
     access_status      VARCHAR(20),
     publish_status     VARCHAR(20),
     ------------------------------------------------------------------------------------------------------
@@ -138,7 +137,7 @@ CREATE TABLE IF NOT EXISTS event_data
     CONSTRAINT event_data_preview_nn CHECK (preview IS NOT NULL),
     CONSTRAINT event_data_description_nn CHECK (description IS NOT NULL),
     CONSTRAINT event_data_access_status_nn CHECK (access_status IS NOT NULL),
-    CONSTRAINT event_data_publish_status_nn CHECK (publish_status IS NOT NULL),
+    CONSTRAINT event_data_publish_status_nn CHECK (publish_status IS NOT NULL)
 );
 
 CREATE TABLE IF NOT EXISTS event_additional_info

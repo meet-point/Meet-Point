@@ -9,7 +9,6 @@ import ru.meetpoint.eventservice.data.enums.EventPublishStatus;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Set;
 import java.util.UUID;
 
 @Builder
@@ -20,7 +19,7 @@ public record EventDetailedResponse(
         String description,
         EventAccessStatus accessStatus,
         EventPublishStatus publishStatus,
-        Set<String> categories,
+        String categoryLabel,
         Timestamp dateTime,
         int maxAllowedPeople,
         int registeredNow,
