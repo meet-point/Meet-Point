@@ -52,6 +52,6 @@ public class LocationData {
     private Set<EventData> eventData = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "location_id")
+    @JoinColumn(name = "location_id", insertable = false, updatable = false)
     private OrganizationData organizationData;
 }

@@ -106,15 +106,14 @@ services:
       dockerfile: Dockerfile
     container_name: event-service
     depends_on:
-      event-db:
-        condition: service_healthy
-      event-liquibase:
-        condition: service_healthy
+      - event-db
+      - event-liquibase
+      - consul
     expose:
       - 8080
     env_file:
       - .env
-    restart: unless-stopped
+    restart: no
     networks:
       - event-network
       - backend

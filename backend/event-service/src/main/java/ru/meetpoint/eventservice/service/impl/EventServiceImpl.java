@@ -2,7 +2,6 @@ package ru.meetpoint.eventservice.service.impl;
 
 import jakarta.persistence.criteria.JoinType;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +46,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public Page<EventShortResponse> getAll(Pageable pageable) {
         return eventDataRepository
-                .findAllPageable(pageable.getPageSize(), pageable.getOffset())
+                .findAllPageable(pageable)
                 .map(eventDataMapper::toShortResponse);
     }
 
@@ -76,8 +75,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional(readOnly = true)
-    public EventDetailedResponse getById(UUID eventId) throws BadRequestException {
-        EventData eventData = eventDataRepository.findByIdWithAllDetails(eventId)
+    public EventDetailedResponse getById(UUID eventId) {
+        EventData eventData = eventDataRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event data with id=%s was not found!".formatted(eventId)));
 
         if (eventData.getEventAdditional() == null) {
@@ -124,7 +123,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public OperationResponse update(UUID eventId, EventRequest eventRequest, UUID userId) {
-        EventData eventData = eventDataRepository.findByIdWithAllDetails(eventId)
+        EventData eventData = eventDataRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event data with id=%s was not found!".formatted(eventId)));
 
         eventDataMapper.toUpdatedEntity(eventData, eventRequest);

@@ -1,7 +1,6 @@
 package ru.meetpoint.eventservice.mapper.event;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Component;
 import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
 import ru.meetpoint.eventservice.data.dto.response.event.EventDetailedResponse;
@@ -14,6 +13,7 @@ import ru.meetpoint.eventservice.data.entity.event.EventData;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationManager;
+import ru.meetpoint.eventservice.exception.BadRequestException;
 
 import java.util.stream.Collectors;
 
@@ -115,7 +115,7 @@ public class EventDataMapper {
                         .lastUpdateBy(eventAdditional.getLastUpdateBy())
                         .updatedAt(eventAdditional.getLastUpdateAt())
                         .managers(organizationData.getManagers().stream()
-                                .map(OrganizationManager::getManagerId)
+                                .map(manager -> manager.getOrganizationManagerId().getManagerId())
                                 .collect(Collectors.toSet()))
                         .build())
                 .build();

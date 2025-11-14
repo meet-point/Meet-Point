@@ -20,7 +20,7 @@ public interface EventService {
 
     Page<EventShortResponse> getByCriteria(UnifiedSearchCriteriaRequest searchCriteriaRequest);
 
-    EventDetailedResponse getById(UUID eventId) throws BadRequestException;
+    EventDetailedResponse getById(UUID eventId);
 
     OperationResponse create(EventRequest eventRequest, UUID userId);
 

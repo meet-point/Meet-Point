@@ -19,14 +19,11 @@ public class OrganizationManager {
     @EmbeddedId
     private OrganizationManagerId organizationManagerId;
 
-    @Column(name = "manager_id", nullable = false)
-    private UUID managerId;
-
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
     @ManyToOne
     @MapsId("organizationId")
     @JoinColumn(name = "organization_id")
-    private OrganizationData organization;
+    private OrganizationData organizationData;
 }

@@ -32,6 +32,6 @@ public class CategoryType {
     String description;
 
     @Builder.Default
-    @OneToMany(mappedBy = "userData", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoryType")
     private Set<CategoryData> credentials = new HashSet<>();
 }

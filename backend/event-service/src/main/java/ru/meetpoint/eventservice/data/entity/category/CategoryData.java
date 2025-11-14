@@ -33,7 +33,7 @@ public class CategoryData {
     private String description;
 
     @Builder.Default
-    @OneToMany(mappedBy = "userData")
+    @OneToMany(mappedBy = "categoryData")
     private Set<EventData> events = new HashSet<>();
 
     @ManyToOne

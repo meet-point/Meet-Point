@@ -16,7 +16,7 @@ spring:
         health-check-interval: 10s
 
   datasource:
-    url: ${EVENT_SERVICE_DATASOURCE_DB}
+    url: ${EVENT_SERVICE_DATASOURCE_URL}
     username: ${EVENT_SERVICE_DATASOURCE_USERNAME}
     password: ${EVENT_SERVICE_DATASOURCE_PASSWORD}
 

@@ -1,12 +1,12 @@
 package ru.meetpoint.eventservice.repository.event;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
 import ru.meetpoint.eventservice.data.entity.event.EventData;
 
 import java.util.List;
@@ -17,11 +17,13 @@ public interface EventDataRepository extends JpaRepository<EventData, UUID>,
         JpaSpecificationExecutor<EventData>, PagingAndSortingRepository<EventData, UUID> {
 
     @Query(value = """
-            SELECT * FROM event_data
-            WHERE publish_status = 'PUBLISHED'
-            LIMIT :limit OFFSET :offset;
-    """, nativeQuery = true)
-    Page<EventData> findAllPageable(@Param("limit") int limit, @Param("offset") long offset);
+        SELECT * FROM event_data
+        WHERE publish_status = 'PUBLISHED'
+""", countQuery = """
+        SELECT COUNT(*) FROM event_data
+        WHERE publish_status = 'PUBLISHED'
+""", nativeQuery = true)
+    Page<EventData> findAllPageable(Pageable pageable);
 
     @Query(value = """
             SELECT * FROM event_data
@@ -39,5 +41,5 @@ public interface EventDataRepository extends JpaRepository<EventData, UUID>,
             "locationData.organizationData",
             "locationData.organizationData.managers"
     })
-    Optional<EventData> findByIdWithAllDetails(UUID uuid);
+    Optional<EventData> findById(UUID uuid);
 }
