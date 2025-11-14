@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: auth-service
+
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        service-name: ${spring.application.name}
+        prefer-ip-address: false
+        host-name: auth-service
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+  liquibase:
+    enabled: false
+
+  data:
+    redis:
+      host: auth-redis
+      port: 6379
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  enabled: true
+  debug: true
+
+jwt:
+  access-token-expiration: 10m
+  refresh-token-expiration: 1d
+  private-key: ${AUTH_PRIVATE_KEY}
+  public-key: ${AUTH_PUBLIC_KEY}
+  refresh-token-cookie-key: refresh_token
+  jwt-subject-key: email
+  jwt-name-key: name
+  jwt-roles-key: roles
+  jwt-user-id-key: userId
+
+encryption:
+  private-key: ${AUTH_PRIVATE_KEY}
+  public-key: ${AUTH_PUBLIC_KEY}
+
+mail:
+  verification-code-subject: Email verification code
+  verification-code-text: Hi! Your code for email verification is
+  sender-username: ${MAIL_USERNAME}
+  email-cookie-key: email
+  email-verification-code-length: 6
+  email-verification-code-expiration: 1d
+
+exception:
+  passwords-do-not-match: The passwords entered do not match. Please re-enter and confirm.
+  invalid-inputs: One or more fields contain invalid data. Please check and correct the form.
+  unauthorized: You are not logged in. Please log in to access this feature.
+  forbidden: You do not have permission to access this resource.
+  internal-error: An unexpected error occurred. Please try again later or contact support.
+  email-already-exist: This email address is already registered. Try logging in or use another email.
+  email-already-verified: Your email has already been verified. You can proceed to log in.
+  user-data-not-found: User information could not be retrieved. Please ensure you are logged in or try again later.
+  account-not-verified: Your account has not been verified. Check your email inbox for the confirmation link.
+  account-banned: Your account has been suspended. Please contact support for assistance.
+  incorrect-login-credentials: Email or password is incorrect. Please try again or use "Forgot password".
+  refresh-token-invalid: Your session has expired or is invalid. Please log in again.
+  email-code-expired: Your verification code has expired. Please request a new code.
+  email-code-invalid: The code you entered is invalid. Please check your email and try again.
+  invalid-jwt: Invalid or expired authentication token. Please log in again to continue.
+
+server:
+  port: 8080
