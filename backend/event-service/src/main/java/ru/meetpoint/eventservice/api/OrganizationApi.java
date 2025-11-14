@@ -17,6 +17,7 @@ import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationDeta
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationShortResponse;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
 
+import java.util.Set;
 import java.util.UUID;
 
 @RequestMapping(path = "/api/v1/organization", produces = "application/json")
@@ -30,7 +31,7 @@ public interface OrganizationApi {
 
     @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
-    OrganizationShortResponse getAllForMainPage();
+    Set<OrganizationShortResponse> getAllForMainPage();
 
     @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)

@@ -1,6 +1,5 @@
 package ru.meetpoint.eventservice.mapper.event;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
 import ru.meetpoint.eventservice.data.dto.response.event.EventDetailedResponse;
@@ -12,13 +11,11 @@ import ru.meetpoint.eventservice.data.entity.event.EventAdditional;
 import ru.meetpoint.eventservice.data.entity.event.EventData;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
-import ru.meetpoint.eventservice.data.entity.organization.OrganizationManager;
 import ru.meetpoint.eventservice.exception.BadRequestException;
 
 import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
 public class EventDataMapper {
 
     public EventData toEntity(EventRequest request) {
@@ -78,7 +75,7 @@ public class EventDataMapper {
 
         OrganizationData organizationData = locationData.getOrganizationData();
         if (organizationData == null) {
-            throw new BadRequestException("Event additional data must be loaded from event data!");
+            throw new BadRequestException("Organization data must be loaded from event data!");
         }
 
         return EventDetailedResponse.builder()

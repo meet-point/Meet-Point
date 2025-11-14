@@ -16,7 +16,7 @@ public interface EventService {
 
     Page<EventShortResponse> getAll(Pageable pageable);
 
-    Set<EventShortResponse> getMainPage();
+    Set<EventShortResponse> getForMainPage();
 
     Page<EventShortResponse> getByCriteria(UnifiedSearchCriteriaRequest searchCriteriaRequest);
 

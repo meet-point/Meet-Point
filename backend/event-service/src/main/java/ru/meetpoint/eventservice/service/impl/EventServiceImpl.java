@@ -51,7 +51,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Set<EventShortResponse> getMainPage() {
+    public Set<EventShortResponse> getForMainPage() {
         return eventDataRepository
                 .findForMainPage().stream()
                 .map(eventDataMapper::toShortResponse)
@@ -74,7 +74,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public EventDetailedResponse getById(UUID eventId) {
         EventData eventData = eventDataRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event data with id=%s was not found!".formatted(eventId)));

@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS location_additional_info
     location_id                  UUID,
     events_description           TEXT,
     completed_events_description TEXT,
-    locations_description        TEXT,
+    organization_description        TEXT,
     creator_id                   UUID,
     created_at                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_update_by               UUID,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS location_additional_info
     CONSTRAINT loc_add_info_location_id_fk FOREIGN KEY (location_id) REFERENCES location_data (location_id),
     CONSTRAINT loc_add_info_events_description_nn CHECK (events_description IS NOT NULL),
     CONSTRAINT loc_add_info_completed_events_description_nn CHECK (completed_events_description IS NOT NULL),
-    CONSTRAINT loc_add_info_locations_description_nn CHECK (locations_description IS NOT NULL),
+    CONSTRAINT loc_add_info_organization_description_nn CHECK (organization_description IS NOT NULL),
     CONSTRAINT loc_add_info_creator_id_nn CHECK (creator_id IS NOT NULL),
     CONSTRAINT loc_add_info_created_at_nn CHECK (created_at IS NOT NULL)
 );

@@ -25,8 +25,8 @@ public class LocationAdditional {
     @Column(name = "completed_events_description")
     private String completedEventsDescription;
 
-    @Column(name = "locations_description")
-    private String locationDescription;
+    @Column(name = "organization_description")
+    private String organizationDescription;
 
     @Column(name = "creator_id")
     private UUID creatorId;

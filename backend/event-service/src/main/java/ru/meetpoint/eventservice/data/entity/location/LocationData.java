@@ -44,14 +44,15 @@ public class LocationData {
     @Column(name = "public_status")
     private LocationPublicStatus publicStatus;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id")
     private LocationAdditional locationAdditional;
 
     @Builder.Default
-    @OneToMany(mappedBy = "locationData")
-    private Set<EventData> eventData = new HashSet<>();
+    @OneToMany(mappedBy = "locationData", fetch = FetchType.LAZY)
+    private Set<EventData> events = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "location_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organization_id")
     private OrganizationData organizationData;
 }

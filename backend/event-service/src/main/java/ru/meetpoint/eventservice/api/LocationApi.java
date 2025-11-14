@@ -17,6 +17,7 @@ import ru.meetpoint.eventservice.data.dto.response.location.LocationShortRespons
 import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
 
+import java.util.Set;
 import java.util.UUID;
 
 @RequestMapping(path = "/api/v1/location", produces = "application/json")
@@ -30,7 +31,7 @@ public interface LocationApi {
 
     @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
-    LocationShortResponse getAllForMainPage();
+    Set<LocationShortResponse> getForMainPage();
 
     @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)

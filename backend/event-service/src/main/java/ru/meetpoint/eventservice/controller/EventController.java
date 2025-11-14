@@ -29,7 +29,7 @@ public class EventController implements EventApi {
 
     @Override
     public Set<EventShortResponse> getForMainPage() {
-        return eventService.getMainPage();
+        return eventService.getForMainPage();
     }
 
     @Override
