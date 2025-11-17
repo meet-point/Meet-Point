@@ -77,7 +77,7 @@ public interface LocationApi {
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageLocations(#locationId, " +
             "#authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
-    @PostMapping("/{locationId}")
+    @DeleteMapping("/{locationId}")
     @ResponseStatus(HttpStatus.OK)
     OperationResponse delete(
             @PathVariable("locationId") UUID locationId,

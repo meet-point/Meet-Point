@@ -16,7 +16,6 @@ public record OrganizationRequest(
         String contactPhone,
         String eventsDescription,
         String completedEventsDescription,
-        String locationsDescription,
-        Set<UUID> managers
+        String locationsDescription
 ) {
 }

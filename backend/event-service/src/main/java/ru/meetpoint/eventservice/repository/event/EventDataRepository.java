@@ -38,8 +38,7 @@ public interface EventDataRepository extends JpaRepository<EventData, UUID>,
             "eventAdditional",
             "categoryData",
             "locationData",
-            "locationData.organizationData",
-            "locationData.organizationData.managers"
+            "locationData.organizationData"
     }, type = EntityGraph.EntityGraphType.LOAD)
     Optional<EventData> findById(UUID uuid);
 }

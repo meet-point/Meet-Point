@@ -85,7 +85,7 @@ public interface EventApi {
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("(@managementServiceImpl.isUserHaveRightsToManageEvents(#eventId, #authPrincipal.userId) " +
             "and hasRole('MANAGER')) or hasRole('ADMIN') or hasRole('OWNER')")
-    @PostMapping("/{eventId}")
+    @DeleteMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     OperationResponse delete(
             @PathVariable("eventId") UUID eventId,

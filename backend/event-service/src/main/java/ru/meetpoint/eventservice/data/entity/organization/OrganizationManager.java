@@ -2,7 +2,6 @@ package ru.meetpoint.eventservice.data.entity.organization;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ru.meetpoint.eventservice.data.entity.organization.embeddable.OrganizationManagerId;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -16,14 +15,17 @@ import java.util.UUID;
 @Table(name = "organization_manager")
 public class OrganizationManager {
 
-    @EmbeddedId
-    private OrganizationManagerId organizationManagerId;
+    @Id
+    @Column(name = "manager_id")
+    private UUID managerId;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "date_time", nullable = false)
     private Timestamp dateTime;
 
-    @ManyToOne
-    @MapsId("organizationId")
+    @OneToOne
     @JoinColumn(name = "organization_id")
     private OrganizationData organizationData;
 }

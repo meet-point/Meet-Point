@@ -1,4 +1,4 @@
-package ru.meetpoint.eventservice.mapper.location;
+package ru.meetpoint.eventservice.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,6 @@ import ru.meetpoint.eventservice.data.entity.location.LocationAdditional;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
 import ru.meetpoint.eventservice.exception.BadRequestException;
-import ru.meetpoint.eventservice.mapper.event.EventDataMapper;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -101,9 +100,6 @@ public class LocationDataMapper {
                         .creatorId(locationAdditional.getCreatorId())
                         .lastUpdateBy(locationAdditional.getLastUpdateBy())
                         .updatedAt(locationAdditional.getLastUpdateAt())
-                        .managers(organizationData.getManagers().stream()
-                                .map(manager -> manager.getOrganizationManagerId().getManagerId())
-                                .collect(Collectors.toSet()))
                         .build())
                 .build();
     }

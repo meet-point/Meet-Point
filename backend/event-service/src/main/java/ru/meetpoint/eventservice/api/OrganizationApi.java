@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import ru.meetpoint.eventservice.data.dto.request.manage.ManagerRequest;
 import ru.meetpoint.eventservice.data.dto.request.organization.OrganizationRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
+import ru.meetpoint.eventservice.data.dto.response.manage.ManagerResponse;
 import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationShortResponse;
@@ -31,7 +33,7 @@ public interface OrganizationApi {
 
     @GetMapping("/main")
     @ResponseStatus(HttpStatus.OK)
-    Set<OrganizationShortResponse> getAllForMainPage();
+    Set<OrganizationShortResponse> getForMainPage();
 
     @PostMapping("/search")
     @ResponseStatus(HttpStatus.OK)
@@ -40,10 +42,10 @@ public interface OrganizationApi {
             @RequestBody UnifiedSearchCriteriaRequest searchCriteriaRequest
     );
 
-    @GetMapping("/{organizationId}")
+    @GetMapping("/{organization-id}")
     @ResponseStatus(HttpStatus.OK)
     OrganizationDetailedResponse getById(
-            @PathVariable("organizationId") UUID organizationId
+            @PathVariable("organization-id") UUID organizationId
     );
 
     @SecurityRequirement(name = "bearerAuth")
@@ -62,10 +64,10 @@ public interface OrganizationApi {
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageOrganization(" +
             "#organizationId, #authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
-    @PatchMapping("/{organizationId}")
+    @PatchMapping("/{organization-id}")
     @ResponseStatus(HttpStatus.OK)
     OperationResponse update(
-            @PathVariable("organizationId") UUID organizationId,
+            @PathVariable("organization-id") UUID organizationId,
 
             @Valid
             @RequestBody OrganizationRequest organizationRequest,
@@ -77,10 +79,52 @@ public interface OrganizationApi {
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageOrganization(" +
             "#organizationId, #authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
-    @PostMapping("/{organizationId}")
+    @DeleteMapping("/{organization-id}")
     @ResponseStatus(HttpStatus.OK)
     OperationResponse delete(
-            @PathVariable("organizationId") UUID organizationId,
+            @PathVariable("organization-id") UUID organizationId,
+
+            @Parameter(hidden = true)
+            @AuthenticationPrincipal UnifiedAuthPrincipal authPrincipal
+    );
+
+    @SecurityRequirement(name = "bearerAuth")
+    @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageOrganization(" +
+            "#organizationId, #authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
+    @GetMapping("/{organization-id}/managers/{manager-id}")
+    @ResponseStatus(HttpStatus.OK)
+    ManagerResponse getManager(
+            @PathVariable("organization-id") UUID organizationId,
+
+            @PathVariable("manager-id") UUID managerId,
+
+            @Parameter(hidden = true)
+            @AuthenticationPrincipal UnifiedAuthPrincipal authPrincipal
+    );
+
+    @SecurityRequirement(name = "bearerAuth")
+    @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageOrganization(" +
+            "#organizationId, #authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
+    @PostMapping("/{organization-id}/managers")
+    @ResponseStatus(HttpStatus.OK)
+    OperationResponse addManagerToOrganization(
+            @PathVariable("organization-id") UUID organizationId,
+
+            @Valid
+            @RequestBody ManagerRequest managerRequest,
+
+            @Parameter(hidden = true)
+            @AuthenticationPrincipal UnifiedAuthPrincipal authPrincipal
+    );
+    @SecurityRequirement(name = "bearerAuth")
+    @PreAuthorize("(hasRole('MANAGER') and @managementServiceImpl.isUserHaveRightsToManageOrganization(" +
+            "#organizationId, #authPrincipal.userId)) or hasRole('ADMIN') or hasRole('OWNER')")
+    @DeleteMapping("/{organization-id}/managers/{manager-id}")
+    @ResponseStatus(HttpStatus.OK)
+    OperationResponse deleteManager(
+            @PathVariable("organization-id") UUID organizationId,
+
+            @PathVariable("manager-id") UUID managerId,
 
             @Parameter(hidden = true)
             @AuthenticationPrincipal UnifiedAuthPrincipal authPrincipal

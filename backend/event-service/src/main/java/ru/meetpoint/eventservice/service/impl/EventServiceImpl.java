@@ -19,7 +19,7 @@ import ru.meetpoint.eventservice.data.entity.event.EventAdditional;
 import ru.meetpoint.eventservice.data.entity.event.EventData;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.exception.NotFoundException;
-import ru.meetpoint.eventservice.mapper.event.EventDataMapper;
+import ru.meetpoint.eventservice.mapper.EventDataMapper;
 import ru.meetpoint.eventservice.repository.category.CategoryDataRepository;
 import ru.meetpoint.eventservice.repository.event.EventDataRepository;
 import ru.meetpoint.eventservice.repository.location.LocationDataRepository;

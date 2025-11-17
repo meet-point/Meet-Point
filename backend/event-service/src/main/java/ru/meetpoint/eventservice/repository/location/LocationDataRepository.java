@@ -37,8 +37,7 @@ public interface LocationDataRepository extends JpaRepository<LocationData, UUID
     @EntityGraph(attributePaths = {
             "locationAdditional",
             "events",
-            "organizationData",
-            "organizationData.managers"
+            "organizationData"
     }, type = EntityGraph.EntityGraphType.LOAD)
     Optional<LocationData> findById(UUID id);
 }

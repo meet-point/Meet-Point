@@ -39,12 +39,15 @@ CREATE TABLE IF NOT EXISTS organization_additional_info
 
 CREATE TABLE IF NOT EXISTS organization_manager
 (
-    organization_id UUID,
     manager_id      UUID,
+    organization_id UUID,
+    email           VARCHAR(100),
     date_time       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     --------------------------------------------------------------------------------------------------------------------
-    CONSTRAINT org_manager_pk PRIMARY KEY (organization_id, manager_id),
+    CONSTRAINT org_manager_pk PRIMARY KEY (manager_id),
     CONSTRAINT org_manager_organization_id_fk FOREIGN KEY (organization_id) REFERENCES organization_data (organization_id),
+    CONSTRAINT org_manager_organization_id_uq UNIQUE (organization_id),
+    CONSTRAINT org_manager_email_nn CHECK (email IS NOT NULL),
     CONSTRAINT org_manager_date_time_nn CHECK (date_time IS NOT NULL)
 );
 
@@ -72,7 +75,7 @@ CREATE TABLE IF NOT EXISTS location_additional_info
     location_id                  UUID,
     events_description           TEXT,
     completed_events_description TEXT,
-    organization_description        TEXT,
+    organization_description     TEXT,
     creator_id                   UUID,
     created_at                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_update_by               UUID,

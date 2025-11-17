@@ -41,9 +41,8 @@ public class OrganizationData {
     @OneToOne(cascade = CascadeType.ALL)
     private OrganizationAdditional organizationAdditional;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "organizationData")
-    private Set<OrganizationManager> managers = new HashSet<>();
+    @OneToOne(mappedBy = "organizationData")
+    private OrganizationManager organizationManager;
 
     @Builder.Default
     @OneToMany(mappedBy = "organizationData")

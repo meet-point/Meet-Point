@@ -1,4 +1,4 @@
-package ru.meetpoint.eventservice.mapper.event;
+package ru.meetpoint.eventservice.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
@@ -111,9 +111,6 @@ public class EventDataMapper {
                         .creatorId(eventAdditional.getCreatorId())
                         .lastUpdateBy(eventAdditional.getLastUpdateBy())
                         .updatedAt(eventAdditional.getLastUpdateAt())
-                        .managers(organizationData.getManagers().stream()
-                                .map(manager -> manager.getOrganizationManagerId().getManagerId())
-                                .collect(Collectors.toSet()))
                         .build())
                 .build();
     }
