@@ -16,9 +16,9 @@ spring:
         health-check-interval: 10s
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${AUTH_SERVICE_DATASOURCE_URL}
+    username: ${AUTH_SERVICE_DATASOURCE_USERNAME}
+    password: ${AUTH_SERVICE_DATASOURCE_PASSWORD}
 
   liquibase:
     enabled: false

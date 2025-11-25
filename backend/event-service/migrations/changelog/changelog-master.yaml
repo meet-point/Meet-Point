@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20251109-schema-initialization
+      author: EgorCharntsev
+      changes:
+        - sqlFile:
+            path: v0.0.1/DDL/V0.0.1__20251109_SCHEMA_INITIALIZATION.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            endDelimiter: ";"
+            encoding: UTF-8

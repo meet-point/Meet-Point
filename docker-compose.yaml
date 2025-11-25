@@ -37,9 +37,6 @@ services:
     env_file:
       - .env
     environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_AUTH_URL}
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_AUTH_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
       AUTH_PRIVATE_KEY: ${JWT_PRIVATE_KEY}
       AUTH_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
     restart: no
@@ -51,9 +48,9 @@ services:
     image: postgres:16-alpine
     container_name: auth-db
     environment:
-      POSTGRES_DB: ${SPRING_DATASOURCE_AUTH_DB}
-      POSTGRES_USER: ${SPRING_DATASOURCE_AUTH_USERNAME}
-      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_AUTH_PASSWORD}
+      POSTGRES_DB: ${AUTH_SERVICE_DATASOURCE_DB}
+      POSTGRES_USER: ${AUTH_SERVICE_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${AUTH_SERVICE_DATASOURCE_PASSWORD}
     ports:
       - "5433:5432"
     volumes:
@@ -76,12 +73,12 @@ services:
     volumes:
       - ./backend/auth-service/migrations/changelog:/changesets
     command:
-      - --searchPath=${AUTH_LIQUIBASE_SEARCH_PATH}
-      - --changelog-file=${AUTH_LIQUIBASE_CHANGELOG_FILE}
-      - --driver=${AUTH_LIQUIBASE_DRIVER}
-      - --url=${AUTH_LIQUIBASE_URL}
-      - --username=${AUTH_LIQUIBASE_USERNAME}
-      - --password=${AUTH_LIQUIBASE_PASSWORD}
+      - --searchPath=${AUTH_SERVICE_LIQUIBASE_SEARCH_PATH}
+      - --changelog-file=${AUTH_SERVICE_LIQUIBASE_CHANGELOG_FILE}
+      - --driver=${AUTH_SERVICE_LIQUIBASE_DRIVER}
+      - --url=${AUTH_SERVICE_LIQUIBASE_URL}
+      - --username=${AUTH_SERVICE_LIQUIBASE_USERNAME}
+      - --password=${AUTH_SERVICE_LIQUIBASE_PASSWORD}
       - update
     networks:
       - auth-network
@@ -103,11 +100,70 @@ services:
     networks:
       - auth-network
 
+  event-service:
+    build:
+      context: backend/event-service
+      dockerfile: Dockerfile
+    container_name: event-service
+    depends_on:
+      - event-db
+      - event-liquibase
+      - consul
+    expose:
+      - 8080
+    env_file:
+      - .env
+    restart: no
+    networks:
+      - event-network
+      - backend
+
+  event-db:
+    image: postgres:16-alpine
+    container_name: event-db
+    environment:
+      POSTGRES_DB: ${EVENT_SERVICE_DATASOURCE_DB}
+      POSTGRES_USER: ${EVENT_SERVICE_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${EVENT_SERVICE_DATASOURCE_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - event-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - event-network
+
+  event-liquibase:
+    image: liquibase/liquibase:4.29
+    container_name: event-liquibase
+    depends_on:
+      event-db:
+        condition: service_healthy
+    volumes:
+      - ./backend/event-service/migrations/changelog:/changesets
+    command:
+      - --searchPath=${EVENT_SERVICE_LIQUIBASE_SEARCH_PATH}
+      - --changelog-file=${EVENT_SERVICE_LIQUIBASE_CHANGELOG_FILE}
+      - --driver=${EVENT_SERVICE_LIQUIBASE_DRIVER}
+      - --url=${EVENT_SERVICE_LIQUIBASE_URL}
+      - --username=${EVENT_SERVICE_LIQUIBASE_USERNAME}
+      - --password=${EVENT_SERVICE_LIQUIBASE_PASSWORD}
+      - update
+    networks:
+      - event-network
+
 volumes:
   auth-db-data:
+  event-db-data:
   redis-data:
 
 networks:
   auth-network:
+  event-network:
   backend:
 
