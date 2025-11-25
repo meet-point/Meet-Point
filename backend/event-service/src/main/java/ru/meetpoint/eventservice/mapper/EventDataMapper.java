@@ -11,9 +11,7 @@ import ru.meetpoint.eventservice.data.entity.event.EventAdditional;
 import ru.meetpoint.eventservice.data.entity.event.EventData;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
-import ru.meetpoint.eventservice.exception.BadRequestException;
-
-import java.util.stream.Collectors;
+import ru.meetpoint.eventservice.error.exception.BadRequestException;
 
 @Component
 public class EventDataMapper {

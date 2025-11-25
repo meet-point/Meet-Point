@@ -1,4 +1,4 @@
-package ru.meetpoint.eventservice.exception;
+package ru.meetpoint.eventservice.error.exception;
 
 import org.springframework.http.HttpStatus;
 

@@ -16,7 +16,7 @@ import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationDeta
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationShortResponse;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationAdditional;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
-import ru.meetpoint.eventservice.exception.NotFoundException;
+import ru.meetpoint.eventservice.error.exception.NotFoundException;
 import ru.meetpoint.eventservice.mapper.OrganizationAdditionalMapper;
 import ru.meetpoint.eventservice.mapper.OrganizationDataMapper;
 import ru.meetpoint.eventservice.repository.organization.OrganizationDataRepository;

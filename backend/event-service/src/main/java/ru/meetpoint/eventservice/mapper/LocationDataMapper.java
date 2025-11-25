@@ -11,7 +11,7 @@ import ru.meetpoint.eventservice.data.entity.event.EventData;
 import ru.meetpoint.eventservice.data.entity.location.LocationAdditional;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
-import ru.meetpoint.eventservice.exception.BadRequestException;
+import ru.meetpoint.eventservice.error.exception.BadRequestException;
 
 import java.util.Set;
 import java.util.stream.Collectors;
