@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: user-service
+
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        service-name: ${spring.application.name}
+        prefer-ip-address: false
+        host-name: user-service
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  datasource:
+    url: ${USER_SERVICE_DATASOURCE_URL}
+    username: ${USER_SERVICE_DATASOURCE_USERNAME}
+    password: ${USER_SERVICE_DATASOURCE_PASSWORD}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+server:
+  port: 8080

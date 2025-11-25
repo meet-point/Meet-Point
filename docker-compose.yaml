@@ -157,13 +157,52 @@ services:
     networks:
       - event-network
 
+  user-service:
+    build:
+      context: backend/user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    depends_on:
+      - consul
+      - user-db
+    expose:
+      - 8080
+    env_file:
+      - .env
+    restart: no
+    networks:
+      - user-network
+      - backend
+
+  user-db:
+    image: postgres:16-alpine
+    container_name: user-db
+    environment:
+      POSTGRES_DB: ${USER_SERVICE_DATASOURCE_DB}
+      POSTGRES_USER: ${USER_SERVICE_DATASOURCE_USERNAME}
+      POSTGRES_PASSWORD: ${USER_SERVICE_DATASOURCE_PASSWORD}
+    ports:
+      - "5435:5432"
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - user-network
+
 volumes:
   auth-db-data:
   event-db-data:
   redis-data:
+  user-db-data:
 
 networks:
   auth-network:
   event-network:
+  user-network:
   backend:
 
