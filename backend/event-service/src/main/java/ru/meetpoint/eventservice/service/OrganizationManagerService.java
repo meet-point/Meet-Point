@@ -2,7 +2,7 @@ package ru.meetpoint.eventservice.service;
 
 import ru.meetpoint.eventservice.data.dto.request.manage.ManagerRequest;
 import ru.meetpoint.eventservice.data.dto.response.manage.ManagerResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.UUID;
 

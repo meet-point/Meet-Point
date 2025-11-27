@@ -12,7 +12,6 @@ import ru.meetpoint.eventservice.data.dto.request.location.LocationRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationShortResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.data.entity.location.LocationAdditional;
 import ru.meetpoint.eventservice.data.entity.location.LocationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
@@ -21,6 +20,7 @@ import ru.meetpoint.eventservice.mapper.LocationDataMapper;
 import ru.meetpoint.eventservice.repository.location.LocationDataRepository;
 import ru.meetpoint.eventservice.repository.organization.OrganizationDataRepository;
 import ru.meetpoint.eventservice.service.LocationService;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.sql.Timestamp;
 import java.time.Instant;

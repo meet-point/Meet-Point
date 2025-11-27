@@ -14,8 +14,8 @@ import ru.meetpoint.eventservice.data.dto.request.location.LocationRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.location.LocationShortResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.Set;
 import java.util.UUID;

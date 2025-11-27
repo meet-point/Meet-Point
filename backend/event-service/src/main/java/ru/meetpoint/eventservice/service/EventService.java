@@ -1,13 +1,12 @@
 package ru.meetpoint.eventservice.service;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.event.EventDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.event.EventShortResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.Set;
 import java.util.UUID;

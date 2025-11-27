@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.meetpoint.eventservice.data.dto.request.manage.ManagerRequest;
 import ru.meetpoint.eventservice.data.dto.response.manage.ManagerResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationData;
 import ru.meetpoint.eventservice.data.entity.organization.OrganizationManager;
 import ru.meetpoint.eventservice.error.exception.NotFoundException;
@@ -13,6 +12,7 @@ import ru.meetpoint.eventservice.mapper.OrganizationManagerMapper;
 import ru.meetpoint.eventservice.repository.organization.OrganizationDataRepository;
 import ru.meetpoint.eventservice.repository.organization.OrganizationManagerRepository;
 import ru.meetpoint.eventservice.service.OrganizationManagerService;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.sql.Timestamp;
 import java.time.Instant;

@@ -9,12 +9,12 @@ import ru.meetpoint.eventservice.data.dto.request.manage.ManagerRequest;
 import ru.meetpoint.eventservice.data.dto.request.organization.OrganizationRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.manage.ManagerResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.organization.OrganizationShortResponse;
 import ru.meetpoint.eventservice.service.OrganizationManagerService;
 import ru.meetpoint.eventservice.service.OrganizationService;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.Set;
 import java.util.UUID;

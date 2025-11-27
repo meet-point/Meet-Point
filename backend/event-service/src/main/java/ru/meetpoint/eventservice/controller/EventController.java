@@ -9,9 +9,9 @@ import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.event.EventDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.event.EventShortResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.eventservice.service.EventService;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.Set;
 import java.util.UUID;

@@ -13,12 +13,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.meetpoint.eventservice.data.dto.request.event.EventRequest;
-import ru.meetpoint.eventservice.data.dto.request.location.LocationRequest;
 import ru.meetpoint.eventservice.data.dto.request.search.UnifiedSearchCriteriaRequest;
 import ru.meetpoint.eventservice.data.dto.response.event.EventDetailedResponse;
 import ru.meetpoint.eventservice.data.dto.response.event.EventShortResponse;
-import ru.meetpoint.eventservice.data.dto.response.operation.OperationResponse;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.Set;
 import java.util.UUID;
