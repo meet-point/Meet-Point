@@ -6,13 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.meetpoint.eventservice.error.dto.ErrorResponse;
-import ru.meetpoint.eventservice.error.dto.ValidationError;
-import ru.meetpoint.eventservice.error.dto.ValidationErrorResponse;
 import ru.meetpoint.eventservice.error.exception.BadRequestException;
 import ru.meetpoint.eventservice.error.exception.ForbiddenException;
 import ru.meetpoint.eventservice.error.exception.NotFoundException;
 import ru.meetpoint.eventservice.error.exception.ServiceException;
+import ru.meetpoint.security.starter.response.ApiErrorResponse;
+import ru.meetpoint.security.starter.response.ValidationErrorResponse;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
-        List<ValidationError> validationErrors = exception.getBindingResult().getFieldErrors().stream()
-                .map(fieldError -> ValidationError.builder()
+        List<ValidationErrorResponse.ValidationError> validationErrors = exception.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> ValidationErrorResponse.ValidationError.builder()
                         .field(fieldError.getField())
                         .message(fieldError.getDefaultMessage())
                         .build())
@@ -31,8 +30,7 @@ public class GlobalExceptionHandler {
 
         ValidationErrorResponse validationErrorResponse = ValidationErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
-                .exception(exception.getClass().getSimpleName())
-                .message(exception.getMessage())
+                .exceptionMessage(exception.getMessage())
                 .validationErrors(validationErrors)
                 .build();
 
@@ -40,41 +38,37 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponse> handleNotFoundException(BadRequestException exception) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ApiErrorResponse> handleNotFoundException(BadRequestException exception) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.builder()
                 .code(HttpStatus.BAD_REQUEST.value())
-                .exception(exception.getClass().getSimpleName())
-                .message(exception.getMessage())
+                .exceptionMessage(exception.getMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<ErrorResponse> handleNotFoundException(ForbiddenException exception) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ApiErrorResponse> handleNotFoundException(ForbiddenException exception) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.builder()
                 .code(HttpStatus.FORBIDDEN.value())
-                .exception(exception.getClass().getSimpleName())
-                .message(exception.getMessage())
+                .exceptionMessage(exception.getMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException exception) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ApiErrorResponse> handleNotFoundException(NotFoundException exception) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.builder()
                 .code(HttpStatus.NOT_FOUND.value())
-                .exception(exception.getClass().getSimpleName())
-                .message(exception.getMessage())
+                .exceptionMessage(exception.getMessage())
                 .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<ErrorResponse> handleServiceException(ForbiddenException exception) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ApiErrorResponse> handleServiceException(ForbiddenException exception) {
+        ApiErrorResponse errorResponse = ApiErrorResponse.builder()
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .exception(exception.getClass().getSimpleName())
-                .message(exception.getMessage())
+                .exceptionMessage(exception.getMessage())
                 .build();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
