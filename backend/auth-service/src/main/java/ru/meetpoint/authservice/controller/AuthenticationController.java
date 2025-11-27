@@ -10,13 +10,13 @@ import ru.meetpoint.authservice.data.dto.request.form.RegistrationForm;
 import ru.meetpoint.authservice.data.dto.response.AccessTokenResponse;
 import ru.meetpoint.authservice.data.dto.response.EmailAvailabilityResponse;
 import ru.meetpoint.authservice.data.dto.response.RegistrationResponse;
-import ru.meetpoint.authservice.error.dto.OperationResponse;
 import ru.meetpoint.authservice.error.exception.ForbiddenException;
 import ru.meetpoint.authservice.error.exception.UnauthorizedException;
 import ru.meetpoint.authservice.service.AuthenticationService;
 import ru.meetpoint.authservice.util.cookie.AuthCookieHelper;
 import ru.meetpoint.security.starter.data.enums.ErrorCode;
 import ru.meetpoint.security.starter.data.principal.UnifiedAuthPrincipal;
+import ru.meetpoint.security.starter.response.OperationResponse;
 
 import java.util.UUID;
 
