@@ -13,7 +13,7 @@ import ru.meetpoint.userservice.data.dto.request.CreateUserAccountRequest;
 import ru.meetpoint.userservice.data.dto.request.CreateUserComplaintRequest;
 import ru.meetpoint.userservice.data.dto.request.UpdateUserRoleRequest;
 import ru.meetpoint.userservice.data.dto.response.OperationResponse;
-import ru.meetpoint.userservice.data.dto.response.ProfileShortResponse;
+import ru.meetpoint.userservice.data.dto.response.ProfileResponse;
 import ru.meetpoint.userservice.data.dto.response.UserAccountResponse;
 import ru.meetpoint.userservice.data.dto.response.UserComplaintShortResponse;
 
@@ -67,7 +67,7 @@ public interface UserApi {
 
     @GetMapping("/{user-id}")
     @ResponseStatus(HttpStatus.OK)
-    ProfileShortResponse getUserProfile(
+    ProfileResponse getUserProfile(
             @Parameter(hidden = true)
             @AuthenticationPrincipal UnifiedAuthPrincipal unifiedAuthPrincipal,
 

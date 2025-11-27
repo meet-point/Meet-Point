@@ -1,11 +1,12 @@
-package ru.meetpoint.userservice.data.dto.request;
+package ru.meetpoint.userservice.data.dto.response;
 
 import lombok.Builder;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Builder
-public record UpdateProfileInfoRequest(
+public record ProfileResponse(
         String firstName,
         String middleName,
         String lastName,
@@ -14,6 +15,7 @@ public record UpdateProfileInfoRequest(
         String phoneNumber,
         String city,
         String avatarUrl,
-        String aboutMe
+        String aboutMe,
+        Timestamp dateOfCreation
 ) {
 }

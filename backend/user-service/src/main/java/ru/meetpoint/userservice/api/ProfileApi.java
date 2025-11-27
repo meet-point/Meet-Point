@@ -11,7 +11,7 @@ import ru.meetpoint.userservice.data.dto.request.UpdateProfileInfoRequest;
 import ru.meetpoint.userservice.data.dto.response.FriendInvitationResponse;
 import ru.meetpoint.userservice.data.dto.response.FriendShortResponse;
 import ru.meetpoint.userservice.data.dto.response.OperationResponse;
-import ru.meetpoint.userservice.data.dto.response.ProfileDetailedResponse;
+import ru.meetpoint.userservice.data.dto.response.ProfileResponse;
 
 import java.util.Set;
 import java.util.UUID;
@@ -21,7 +21,7 @@ public interface ProfileApi {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    ProfileDetailedResponse getProfile(
+    ProfileResponse getProfile(
             @Parameter(hidden = true)
             @AuthenticationPrincipal UnifiedAuthPrincipal unifiedAuthPrincipal
     );

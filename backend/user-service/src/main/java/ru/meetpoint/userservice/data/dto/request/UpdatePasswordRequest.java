@@ -4,6 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record UpdatePasswordRequest(
-
+        String password,
+        String confirmPassword
 ) {
 }

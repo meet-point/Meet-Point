@@ -1,6 +1,9 @@
 package ru.meetpoint.userservice.data.dto.response;
 
-public record OperationResponse(
+import java.util.UUID;
 
+public record OperationResponse(
+        boolean isSuccess,
+        UUID entityId
 ) {
 }

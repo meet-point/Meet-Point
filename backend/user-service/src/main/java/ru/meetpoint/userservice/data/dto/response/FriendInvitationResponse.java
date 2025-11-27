@@ -4,6 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record FriendInvitationResponse(
-
+        FriendShortResponse shortResponse,
+        String shortMessage
 ) {
 }
